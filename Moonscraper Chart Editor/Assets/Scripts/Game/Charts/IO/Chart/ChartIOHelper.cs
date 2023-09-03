@@ -113,6 +113,7 @@ namespace MoonscraperChartEditor.Song.IO
             { "GHLBass",        Song.Instrument.GHLiveBass },
             { "GHLRhythm",      Song.Instrument.GHLiveRhythm },
             { "GHLCoop",        Song.Instrument.GHLiveCoop },
+            { "GhostSingle",    Song.Instrument.GhostGuitar },
         };
 
         public static readonly IReadOnlyDictionary<Song.Instrument, TrackLoadType> c_instrumentParsingTypeLookup = new Dictionary<Song.Instrument, TrackLoadType>()

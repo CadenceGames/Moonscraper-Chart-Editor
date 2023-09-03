@@ -42,7 +42,10 @@ namespace MoonscraperChartEditor.Song
 
                 exportOptions.forced = true;
                 exportOptions.copyDownEmptyDifficulty = false;
-                exportOptions.format = IO.ExportOptions.Format.Chart;
+                //OLD
+                //exportOptions.format = IO.ExportOptions.Format.Chart;
+                //NEW
+                exportOptions.format = IO.ExportOptions.Format.Dbeat;
                 exportOptions.targetResolution = this.resolution;
                 exportOptions.tickOffset = 0;
                 exportOptions.isGeneralSave = false;
@@ -109,6 +112,7 @@ namespace MoonscraperChartEditor.Song
             // Chart initialisation
             int numberOfInstruments = EnumX<Instrument>.Count - 1;     // Don't count the "Unused" instrument
             charts = new Chart[numberOfInstruments * EnumX<Difficulty>.Count];
+            Debug.Log(charts.Length);
 
             for (int i = 0; i < charts.Length; ++i)
             {
@@ -323,7 +327,7 @@ namespace MoonscraperChartEditor.Song
         /// Adds a synctrack object (bpm or time signature) into the song.
         /// </summary>
         /// <param name="syncTrackObject">Item to add.</param>
-        /// <param name="autoUpdate">Automatically update all read-only arrays? 
+        /// <param name="autoUpdate">Automatically update all read-only arrays?
         /// If set to false, you must manually call the updateArrays() method, but is useful when adding multiple objects as it increases performance dramatically.</param>
         public void Add(SyncTrack syncTrackObject, bool autoUpdate = true)
         {
@@ -337,7 +341,7 @@ namespace MoonscraperChartEditor.Song
         /// <summary>
         /// Removes a synctrack object (bpm or time signature) from the song.
         /// </summary>
-        /// <param name="autoUpdate">Automatically update all read-only arrays? 
+        /// <param name="autoUpdate">Automatically update all read-only arrays?
         /// If set to false, you must manually call the updateArrays() method, but is useful when removing multiple objects as it increases performance dramatically.</param>
         /// <returns>Returns whether the removal was successful or not (item may not have been found if false).</returns>
         public bool Remove(SyncTrack syncTrackObject, bool autoUpdate = true)
@@ -364,7 +368,7 @@ namespace MoonscraperChartEditor.Song
         /// Adds an event object (section or event) into the song.
         /// </summary>
         /// <param name="syncTrackObject">Item to add.</param>
-        /// <param name="autoUpdate">Automatically update all read-only arrays? 
+        /// <param name="autoUpdate">Automatically update all read-only arrays?
         /// If set to false, you must manually call the updateArrays() method, but is useful when adding multiple objects as it increases performance dramatically.</param>
         public void Add(Event eventObject, bool autoUpdate = true)
         {
@@ -378,7 +382,7 @@ namespace MoonscraperChartEditor.Song
         /// <summary>
         /// Removes an event object (section or event) from the song.
         /// </summary>
-        /// <param name="autoUpdate">Automatically update all read-only arrays? 
+        /// <param name="autoUpdate">Automatically update all read-only arrays?
         /// If set to false, you must manually call the updateArrays() method, but is useful when removing multiple objects as it increases performance dramatically.</param>
         /// <returns>Returns whether the removal was successful or not (item may not have been found if false).</returns>
         public bool Remove(Event eventObject, bool autoUpdate = true)
@@ -414,7 +418,7 @@ namespace MoonscraperChartEditor.Song
         }
 
         /// <summary>
-        /// Updates all read-only values and bpm assigned time values. 
+        /// Updates all read-only values and bpm assigned time values.
         /// </summary>
         public void UpdateCache()
         {
@@ -560,6 +564,7 @@ namespace MoonscraperChartEditor.Song
             GHLiveBass,
             GHLiveRhythm,
             GHLiveCoop,
+            GhostGuitar,
             Unrecognised = 99,
         }
 
