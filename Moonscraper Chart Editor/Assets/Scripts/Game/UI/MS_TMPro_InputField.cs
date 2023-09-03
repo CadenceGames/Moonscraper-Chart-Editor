@@ -14,7 +14,7 @@ using TMPro;
 
 /// <summary>
 /// Editable text input field.
-/// A copy of the regular TextMeshPro input field but with fixes to OnScroll(PointerEventData eventData) that was breaking in builds. 
+/// A copy of the regular TextMeshPro input field but with fixes to OnScroll(PointerEventData eventData) that was breaking in builds.
 /// </summary>
 [AddComponentMenu("UI/MS TextMeshPro - Input Field", 11)]
 public class MS_TMPro_InputField : Selectable,
@@ -124,7 +124,7 @@ public class MS_TMPro_InputField : Selectable,
     private float m_ScrollPosition;
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     [SerializeField]
     protected float m_ScrollSensitivity = 1.0f;
@@ -890,7 +890,7 @@ public class MS_TMPro_InputField : Selectable,
 
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public int stringPosition
     {
@@ -1016,7 +1016,7 @@ public class MS_TMPro_InputField : Selectable,
             // Cache reference to Vertical Scrollbar RectTransform and add listener.
             if (m_VerticalScrollbar != null)
             {
-                m_TextComponent.ignoreRectMaskCulling = true;
+                //FIXME:m_TextComponent.ignoreRectMaskCulling = true;
                 m_VerticalScrollbar.onValueChanged.AddListener(OnScrollbarValueChange);
             }
 
@@ -1989,7 +1989,7 @@ public class MS_TMPro_InputField : Selectable,
 
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="eventData"></param>
     public virtual void OnUpdateSelected(BaseEventData eventData)
@@ -2037,7 +2037,7 @@ public class MS_TMPro_InputField : Selectable,
 
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="eventData"></param>
     public virtual void OnScroll(PointerEventData eventData)
@@ -2222,7 +2222,7 @@ public class MS_TMPro_InputField : Selectable,
         {
             stringSelectPositionInternal = stringPositionInternal = position;
 
-            // Only decrease caret position as we cross character boundary. 
+            // Only decrease caret position as we cross character boundary.
             if (caretPositionInternal > 0 && stringPositionInternal <= m_TextComponent.textInfo.characterInfo[caretPositionInternal - 1].index)
                 caretSelectPositionInternal = caretPositionInternal = GetCaretPositionFromStringIndex(stringSelectPositionInternal);
         }
@@ -3489,7 +3489,7 @@ public class MS_TMPro_InputField : Selectable,
 
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="startPosition"></param>
     /// <param name="height"></param>
@@ -3730,7 +3730,7 @@ public class MS_TMPro_InputField : Selectable,
                 {
                     OnFocus();
 
-                    // Opening the soft keyboard sets its selection to the end of the text. 
+                    // Opening the soft keyboard sets its selection to the end of the text.
                     // As such, we set the selection to match the Input Field's internal selection.
                     if (m_SoftKeyboard != null)
                     {

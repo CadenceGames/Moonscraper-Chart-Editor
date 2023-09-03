@@ -89,7 +89,7 @@ public class Export : DisplayMenu {
             fileTypeDropdown.value = 0;
         }
 
-        generateIniToggle.interactable = !enabled;        
+        generateIniToggle.interactable = !enabled;
         fileTypeDropdown.interactable = !enabled;
         magmaButton.interactable = !enabled;
         exportingInfo.text = chPackageToggle.isOn ? chPackageText : chartInfoText;
@@ -128,6 +128,9 @@ public class Export : DisplayMenu {
         else if (exportOptions.format == ExportOptions.Format.Midi)
         {
             aquiredFilePath = FileExplorer.SaveFilePanel(new ExtensionFilter("Midi files", "mid"), defaultFileName, "mid", out saveLocation);
+        }
+        else if(exportOptions.format == ExportOptions.Format.Dbeat){
+            aquiredFilePath = FileExplorer.SaveFilePanel(new ExtensionFilter("DBeat files", "dbeat"), defaultFileName, "dbeat", out saveLocation);
         }
         else
             throw new Exception("Invalid file extension");
@@ -178,7 +181,7 @@ public class Export : DisplayMenu {
         {
             new LoadingTask("Exporting " + exportOptions.format, () =>
             {
-                if (exportOptions.format == ExportOptions.Format.Chart)
+                if (exportOptions.format == ExportOptions.Format.Chart || exportOptions.format == ExportOptions.Format.Dbeat)
                 {
                     try
                     {
@@ -266,6 +269,9 @@ public class Export : DisplayMenu {
             case 1:
                 setAsMidFile();
                 break;
+            case 2:
+                setAsDbeatFile();
+                break;
             case 0:
             default:
                 setAsChartFile();
@@ -285,6 +291,12 @@ public class Export : DisplayMenu {
         exportOptions.format = ExportOptions.Format.Midi;
         exportingInfo.text = midInfoText;
         midiSettings.gameObject.SetActive(true);
+    }
+
+    void setAsDbeatFile(){
+        exportOptions.format = ExportOptions.Format.Dbeat;
+        generateIniToggle.isOn = true;
+        midiSettings.gameObject.SetActive(false);
     }
 
     public void SetTrackEventDifficulty(int value)
@@ -504,7 +516,7 @@ public class Export : DisplayMenu {
                     Debug.LogFormat("Unable to re-encode file, copying {0} to {1}", audioLocation, destPath);
                     File.Copy(audioLocation, destPath, true);
                 }
-            });         
+            });
         }
 
         for (int i = 0; i < songEncodeActions.Count; ++i)

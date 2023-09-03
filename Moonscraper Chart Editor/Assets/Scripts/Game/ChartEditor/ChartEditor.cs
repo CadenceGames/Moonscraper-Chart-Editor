@@ -37,7 +37,7 @@ public class ChartEditor : UnitySingleton<ChartEditor>
     public Transform camYMax;
     public Transform mouseYMaxLimit;
     public Transform mouseYMinLimit;
-    public Indicators indicators;               // Cancels hit animations upon stopping playback   
+    public Indicators indicators;               // Cancels hit animations upon stopping playback
     public GroupSelect groupSelect;
     public Globals globals;
     [SerializeField]
@@ -76,7 +76,7 @@ public class ChartEditor : UnitySingleton<ChartEditor>
     CommandStack m_songCommandStack;
 
     /// <summary>
-    /// State machine for the entire application. 
+    /// State machine for the entire application.
     /// Editor and Play states are instanciated as we need them.
     /// </summary>
     public enum State
@@ -98,7 +98,7 @@ public class ChartEditor : UnitySingleton<ChartEditor>
     /// An example of this is the object pooling system, needs to hold onto those objects for the entire lifetime of the scene as objects always need to be visible. Would also be dumb memory-wise.
     /// See #region State Control for full implementation
     /// </summary>
-    Dictionary<State, List<SystemManagerState.ISystem>> persistentSystemsForStates = new Dictionary<State, List<SystemManagerState.ISystem>>();     
+    Dictionary<State, List<SystemManagerState.ISystem>> persistentSystemsForStates = new Dictionary<State, List<SystemManagerState.ISystem>>();
 
     static readonly Dictionary<string, LoadedStreamStore.StreamConfig> soundMapConfig = new Dictionary<string, LoadedStreamStore.StreamConfig>(){
             { SkinKeys.metronome,   new LoadedStreamStore.StreamConfig(System.IO.Path.Combine(Application.streamingAssetsPath, "SFX/metronome.wav")) },
@@ -145,7 +145,7 @@ public class ChartEditor : UnitySingleton<ChartEditor>
     [HideInInspector]
     public ChartEditorSessionFlags sessionFlags = ChartEditorSessionFlags.None;
 
-    readonly string[] ValidFileExtentions = new string[] { "chart", "mid", "msce" };
+    readonly string[] ValidFileExtentions = new string[] { "chart", "mid", "msce","dbeat" };
 
     // Use this for initialization
     void Awake () {
@@ -347,7 +347,7 @@ public class ChartEditor : UnitySingleton<ChartEditor>
     }
 
     bool EditCheck()
-    {    
+    {
         // Check for unsaved changes
         if (isDirty)
         {
@@ -576,7 +576,7 @@ public class ChartEditor : UnitySingleton<ChartEditor>
             sb.Append(Ellipsis);
         }
 
-        windowHandleManager.SetProjectNameStr(sb.ToString()); 
+        windowHandleManager.SetProjectNameStr(sb.ToString());
 
         sb.Clear();
         sb.Append(currentChart.name);
@@ -898,7 +898,7 @@ public class ChartEditor : UnitySingleton<ChartEditor>
         }
         else
         {
-            
+
             menuBar.SetInstrument("guitar");
             menuBar.SetDifficulty("expert");
         }
@@ -928,7 +928,7 @@ public class ChartEditor : UnitySingleton<ChartEditor>
         else
         {
             commandStack.Clear();
-        }       
+        }
 
         Stop();
 
@@ -1393,7 +1393,7 @@ public class ChartEditor : UnitySingleton<ChartEditor>
             bottomLeft = new Vector2((float)left, currentSong.TickToWorldYPosition(songObjectsCopy[0].tick));
             upperRight = new Vector2((float)right, currentSong.TickToWorldYPosition(songObjectsCopy[songObjectsCopy.Length - 1].tick));
             area = new Clipboard.SelectionArea(bottomLeft, upperRight, songObjectsCopy[0].tick, songObjectsCopy[songObjectsCopy.Length - 1].tick);
-        }        
+        }
 
         ClipboardObjectController.SetData(songObjectsCopy, area, currentSong);
     }

@@ -14,3 +14,7 @@ ow_face_off
 [mix 1 drums0d]
 [mix 2 drums0d]
 [mix 3 drums0d]
+trigger:
+triggerend:
+group:
+groupend:

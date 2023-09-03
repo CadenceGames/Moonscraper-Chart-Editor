@@ -42,7 +42,7 @@ namespace MoonscraperChartEditor.Song.IO
         struct NoteEvent
         {
             public uint tick;
-            public int noteNumber;          
+            public int noteNumber;
             public uint length;
         }
 
@@ -149,13 +149,14 @@ namespace MoonscraperChartEditor.Song.IO
                     throw new Exception("File does not exist");
 
                 string extension = Path.GetExtension(filepath);
-                bool standardChartFormat = extension == ".chart";
+                bool validFormat = extension == ".chart";
+                validFormat = validFormat || (extension == ".dbeat");
 
-                if (standardChartFormat || extension == MsceIOHelper.FileExtention)
+                if (validFormat || extension == MsceIOHelper.FileExtention)
                 {
                     Song song = new Song();
 
-                    ChartIOHelper.FileSubType fileLoadType = standardChartFormat ? ChartIOHelper.FileSubType.Default : ChartIOHelper.FileSubType.MoonscraperPropriety;
+                    ChartIOHelper.FileSubType fileLoadType = validFormat ? ChartIOHelper.FileSubType.Default : ChartIOHelper.FileSubType.MoonscraperPropriety;
 
                     LoadChart(song, filepath, fileLoadType);
 
